@@ -6,11 +6,19 @@
 #
 # USAGE:
 #
-#         # Build image
-#         docker build -t slic3r .
+#    # Build image
+#    docker build -t discord-canary .
 #
-#         # Run it!
-#	  docker run -v /tmp/.X11-unix:/tmp/.X11-unix --device /dev/snd -v discordCanarySettings:/home/discord -v /dev/shm:/dev/shm:z -v /etc/localtime:/etc/localtime:ro -v /var/run/dbus:/var/run/dbus -v /var/run/user/$(id -u)/bus:/var/run/user/1000/bus -e DBUS_SESSION_BUS_ADDRESS="unix:path=/var/run/user/1000/bus" -e DISPLAY=unix$DISPLAY --rm --group-add $(getent group audio | cut -d: -f3) discordcanary
+#    # Run it!
+#    docker run -v /tmp/.X11-unix:/tmp/.X11-unix \
+#    --device /dev/snd \
+#    -v discordCanarySettings:/home/discord \
+#    -v /dev/shm:/dev/shm:z \
+#    -v /etc/localtime:/etc/localtime:ro \
+#    -v /var/run/dbus:/var/run/dbus \
+#    -v /var/run/user/$(id -u)/bus:/var/run/user/1000/bus \
+#    -e DBUS_SESSION_BUS_ADDRESS="unix:path=/var/run/user/1000/bus" \
+#    -e DISPLAY=unix$DISPLAY --rm --group-add $(getent group audio | cut -d: -f3) discord-canary
 #
 #         # If this fails, it might either be SELinux or
 #         # just needing to allow access to your local X session
@@ -18,11 +26,11 @@
 #
 # VOLUME MANAGEMENT:
 #
-#         # Remove and wipe settings
-#         docker volume rm slic3rSettings
+#    # Remove and wipe settings
+#    docker volume rm discordCanarySettings
 #
-#         # Information about where stuff is
-#         docker volume inspect slic3rSettings
+#    # Information about where stuff is
+#    docker volume inspect discordCanarySettings
 
 FROM debian:stretch
 

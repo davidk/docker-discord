@@ -4,25 +4,34 @@
 #                Tested on Fedora 25.
 #                Derived from Jess Frazelle's Atom Dockerfile: https://raw.githubusercontent.com/jessfraz/dockerfiles/master/atom/Dockerfile
 #
-# USAGE:
+# USAGE
 #
-#         # Build image
-#         docker build -t slic3r .
+#       # Build image
+#       docker build -t discord .
 #
-#         # Run it!
-#	  docker run -v /tmp/.X11-unix:/tmp/.X11-unix --device /dev/snd -v discordSettings:/home/discord -v /dev/shm:/dev/shm:z -v /etc/localtime:/etc/localtime:ro -v /var/run/dbus:/var/run/dbus -v /var/run/user/$(id -u)/bus:/var/run/user/1000/bus -e DBUS_SESSION_BUS_ADDRESS="unix:path=/var/run/user/1000/bus" -e DISPLAY=unix$DISPLAY --rm --group-add $(getent group audio | cut -d: -f3) discord
+#       # Run it!
+#       docker run -v /tmp/.X11-unix:/tmp/.X11-unix \
+#       --device /dev/snd \
+#       -v discordSettings:/home/discord \
+#       -v /dev/shm:/dev/shm:z \
+#       -v /etc/localtime:/etc/localtime:ro \
+#       -v /var/run/dbus:/var/run/dbus \
+#       -v /var/run/user/$(id -u)/bus:/var/run/user/1000/bus \
+#       -e DBUS_SESSION_BUS_ADDRESS="unix:path=/var/run/user/1000/bus" \
+#       -e DISPLAY=unix$DISPLAY --rm --group-add $(getent group audio | cut -d: -f3) discord
 #
-#         # If this fails, it might either be SELinux or
-#         # just needing to allow access to your local X session
-#         xhost local:root
+#      # If this fails, it might either be SELinux or
+#      # just needing to allow access to your local X session.
+#      # See if there is anything in /var/log/audit/audit.log or try:
+#      xhost local:root
 #
-# VOLUME MANAGEMENT:
+# VOLUME MANAGEMENT
 #
-#         # Remove and wipe settings
-#         docker volume rm slic3rSettings
+#      # Remove and wipe settings
+#      docker volume rm discordSettings
 #
-#         # Information about where stuff is
-#         docker volume inspect slic3rSettings
+#      # Information about where stuff is
+#      docker volume inspect discordSettings
 
 FROM debian:stretch
 
