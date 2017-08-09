@@ -61,7 +61,7 @@ RUN groupadd discord \
   && useradd -g discord --create-home --home-dir /home/discord discord
 
 WORKDIR /home/discord
-ENV DISCORD_VER 0.0.1
+ENV DISCORD_VER 0.0.2
 
 RUN apt-get update && apt-get install -y \
   curl \

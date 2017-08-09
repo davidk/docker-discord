@@ -34,7 +34,7 @@
 
 FROM debian:stretch
 
-ENV DISCORD_CANARY_VER 0.0.15
+ENV DISCORD_CANARY_VER 0.0.24
 
 RUN apt-get update && apt-get install -y \
   libc++1 \
