@@ -1,0 +1,35 @@
+name: 'Build Discord Container'
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v1
+    
+    - name: login
+      uses: actions/docker/login@c08a5fc9e0286844156fefff2c141072048141f6
+      env:
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+
+    - name: Get Discord stable release versions
+      run: |
+        curl -sSI "https://discordapp.com/api/download?platform=linux&format=deb" | grep -i "location: " | awk "{print $2}" | tr -d "[:space:]" | sed -e "s/.*discord-//g" | sed -e "s/.deb//g" > ${GITHUB_WORKSPACE}/discord-stable-version
+    
+    - name: Get Discord Canary release version    
+      run: |
+        curl -sSI "https://discordapp.com/api/download/ptb?platform=linux&format=deb" | grep -i "location: " | awk "{print $2}" | tr -d "[:space:]" | sed -e "s/.*discord-//g" | sed -e "s/.deb//g" > ${GITHUB_WORKSPACE}/discord-canary-version
+
+    - name: Build the latest stable Discord release
+      uses: actions/docker/cli-multi@a73395b
+      with:
+        args: '"build --build-arg DOWNLOAD_LINK=\"https://discordapp.com/api/download?platform=linux&format=deb\" -t keyglitch/discord:stable ." "tag keyglitch/discord:stable keyglitch/discord:stable-$(cat ${GITHUB_WORKSPACE}/discord-stable-version)" "push keyglitch/discord"'
+
+    - name: Build the latest canary Discord release
+      uses: actions/docker/cli-multi@a73395b
+      with:
+        args: '"build --build-arg DOWNLOAD_LINK=\"https://discordapp.com/api/download/ptb?platform=linux&format=deb\" -t keyglitch/discord:canary ." "tag keyglitch/discord:canary keyglitch/discord:canary-$(cat ${GITHUB_WORKSPACE}/discord-canary-version)" "push keyglitch/discord"'
