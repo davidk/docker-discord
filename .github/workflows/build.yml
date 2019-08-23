@@ -1,7 +1,9 @@
 name: 'Build Discord Container'
 
-on: [push]
-
+on:
+  schedule:
+  - cron: 0 8 * * *
+  
 jobs:
   build:
 
