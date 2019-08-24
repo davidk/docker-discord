@@ -2,7 +2,7 @@
 
 This will run the latest release version of Discord in a Docker container:
 
-To get at the canary version, change the last part of the following command string to `keyglitch/docker-discord:canary` (Discord will likely download updates and quit, stopping the container -- just re-run to start since the volume it downloads to is persisted).
+To get at the canary version, change the last part of the following command string to `keyglitch/discord:stable` (Discord will likely download updates and quit, stopping the container -- just re-run to start since the volume it downloads to is persisted).
 
 Note: SELinux on Fedora isn't too happy with this container (mostly to do with desktop notifications through libnotify), so be sure to add exceptions as needed. Sound is also quite finicky, and is not muxed with the host (so playing audio on the host will block the container, vice versa).
 
@@ -17,4 +17,4 @@ Note: SELinux on Fedora isn't too happy with this container (mostly to do with d
     -e DISPLAY=unix$DISPLAY \
     --rm \
     --group-add $(getent group audio | cut -d: -f3) \
-    keyglitch/docker-discord:latest
+    keyglitch/discord:stable
