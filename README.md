@@ -23,6 +23,8 @@ Note: SELinux on Fedora isn't too happy with this container (mostly to do with d
     -v /var/run/dbus:/var/run/dbus \
     -v /var/run/user/$(id -u)/bus:/var/run/user/1000/bus \
     -e DBUS_SESSION_BUS_ADDRESS="unix:path=/var/run/user/1000/bus" \
+    -v /var/run/user/$(id -u)/pulse:/var/run/user/1000/pulse \
+    -e PULSE_SERVER="unix:/run/user/1000/pulse/native" \
     -e DISPLAY=unix$DISPLAY \
     --rm \
     --group-add $(getent group audio | cut -d: -f3) \

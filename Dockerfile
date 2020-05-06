@@ -17,6 +17,8 @@
 #    -v /var/run/dbus:/var/run/dbus \
 #    -v /var/run/user/$(id -u)/bus:/var/run/user/1000/bus \
 #    -e DBUS_SESSION_BUS_ADDRESS="unix:path=/var/run/user/1000/bus" \
+#    -v /var/run/user/$(id -u)/pulse:/var/run/user/1000/pulse \
+#    -e PULSE_SERVER="unix:/run/user/1000/pulse/native" \
 #    -e DISPLAY=unix$DISPLAY --rm --group-add $(getent group audio | cut -d: -f3) discord
 #
 #    # If this fails, it might either be SELinux or
@@ -45,6 +47,7 @@ RUN apt-get update && apt-get install -y \
   libgnome-keyring-dev \
   libgtk-3-0 \
   libcanberra-gtk3-module \
+  libpulse0 \
   libnotify4 \
   libnss3 \
   libxkbfile1 \
