@@ -43,7 +43,8 @@ RUN apt-get update && apt-get install -y \
   libcap2 \
   libgconf-2-4 \
   libgnome-keyring-dev \
-  libgtk2.0-0 \
+  libgtk-3-0 \
+  libcanberra-gtk3-module \
   libnotify4 \
   libnss3 \
   libxkbfile1 \
