@@ -15,7 +15,8 @@ Depending on the version, Discord will likely download updates and quit, stoppin
 
 Note: SELinux on Fedora isn't too happy with this container (mostly to do with desktop notifications through libnotify), so be sure to add exceptions as needed. Sound is also quite finicky, and is not muxed with the host (so playing audio on the host will block the container, vice versa).
 
-    docker run -v /tmp/.X11-unix:/tmp/.X11-unix \
+    docker run --privileged \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
     --device /dev/snd \
     -v discordSettings:/home/discord \
     -v /dev/shm:/dev/shm:z \
