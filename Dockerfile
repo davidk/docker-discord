@@ -33,7 +33,7 @@
 #    # Information about where stuff is
 #    docker volume inspect discordSettings
 
-FROM debian:stretch
+FROM debian:stretch-slim
 
 RUN apt-get update && apt-get install -y \
   libc++1 \
