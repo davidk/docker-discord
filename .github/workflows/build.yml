@@ -35,10 +35,13 @@ jobs:
       run: |
         docker build --build-arg DOWNLOAD_LINK="https://discordapp.com/api/download?platform=linux&format=deb" -t keyglitch/discord:stable . && \
         docker tag keyglitch/discord:stable keyglitch/discord:stable-$(cat ${GITHUB_WORKSPACE}/discord-stable-version) && \
-        docker push keyglitch/discord
+        docker push keyglitch/discord:stable && \
+        docker push keyglitch/discord:stable-$(cat ${GITHUB_WORKSPACE}/discord-stable-version)
 
     - name: Build the latest canary Discord release
       run: |
         docker build --build-arg DOWNLOAD_LINK="https://discordapp.com/api/download/ptb?platform=linux&format=deb" -t keyglitch/discord:canary . && \
         docker tag keyglitch/discord:canary keyglitch/discord:canary-$(cat ${GITHUB_WORKSPACE}/discord-canary-version) && \
-        docker push keyglitch/discord
+        docker push keyglitch/discord:canary && \
+        docker push keyglitch/discord:canary-$(cat ${GITHUB_WORKSPACE}/discord-canary-version)
+
