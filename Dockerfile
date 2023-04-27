@@ -33,9 +33,12 @@
 #    # Information about where stuff is
 #    docker volume inspect discordSettings
 
-FROM debian:stretch-slim
+FROM debian:bullseye-slim
 
 RUN apt-get update && apt-get install -y \
+  libcurl4 \
+  libgbm1 \
+  libdrm2 \
   libc++1 \
   libappindicator1 \
   gconf2 \
@@ -44,7 +47,6 @@ RUN apt-get update && apt-get install -y \
   libasound2 \
   libcap2 \
   libgconf-2-4 \
-  libgnome-keyring-dev \
   libgtk-3-0 \
   libcanberra-gtk3-module \
   libpulse0 \
