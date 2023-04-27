@@ -36,6 +36,7 @@
 FROM debian:bullseye-slim
 
 RUN apt-get update && apt-get install -y \
+  libgl1 \
   libcurl4 \
   libgbm1 \
   libdrm2 \
@@ -87,7 +88,8 @@ RUN apt-get update && apt-get install -y \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get purge -y --auto-remove curl \
   && apt-get autoclean \
-  && chown -R discord:discord /home/discord
+  && chown -R discord:discord /home/discord \
+  && rm -f /etc/localtime
 
 COPY start.sh /opt/scripts/
 RUN chmod +x /opt/scripts/start.sh
