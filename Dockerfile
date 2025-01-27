@@ -59,6 +59,7 @@ RUN apt-get update && apt-get install -y \
   libx11-xcb1 \
   xdg-utils \
   libatomic1 \
+  fonts-noto-color-emoji \
   --no-install-recommends \
   && rm -rf /var/lib/apt/lists/* \
   && apt-get autoremove -y \
